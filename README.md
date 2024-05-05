@@ -7,7 +7,7 @@ Diesen Weg fand ich super, weil ich entscheiden kann, ob und wann die Zeit gespe
 
 ## Anleitung
 
-In diesem Abschnitt sind die Anleitungen hinterlegt, um die Zeiterfassung zu aktivieren. Lies dir die folgenden Anleitungen durch oder sieh dir mein [YouTube-Video](https://www.youtube.com/watch?v=GKgsSwaC2bk) an wo ich dich Schritt für Schritt durchführe. Sollte deine Java Version 20 oder neuer sein kannst du direkt zum Punkt 01:35 springen, da die Klassen bereit kompiliert sind.
+In diesem Abschnitt sind die Anleitungen hinterlegt, um die Zeiterfassung zu aktivieren. Lies dir die folgenden Anleitungen durch oder sieh dir mein [YouTube-Video](https://www.youtube.com/watch?v=GKgsSwaC2bk) an wo ich dich Schritt für Schritt durchführe. Sollte deine Java Version 20 oder neuer sein kannst du direkt zum Punkt 01:35 springen, da die Klassen bereits kompiliert sind.
 
 - ### JRE Version 20+ 
 
