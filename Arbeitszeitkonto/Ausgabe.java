@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Ausgabe {
@@ -22,8 +22,8 @@ public class Ausgabe {
         BufferedReader bufferedReader = new BufferedReader(reader);
 
         String line;
-        LocalTime startZeit;
-        LocalTime endZeit;
+        LocalDateTime startZeit;
+        LocalDateTime endZeit;
         long gesamtStunden = 0;
         long gesamtMinuten = 0;
 
@@ -33,14 +33,16 @@ public class Ausgabe {
             String[] daten = line.split(",");
 
             if (daten.length >= 5 && daten[0].equals("START")) { // Überprüfen, ob Datensatz gültig ist
-                String datum = daten[1].trim();
+                String startDatum = daten[1].trim();
                 String startZeitString = daten[2].trim(); // Startzeit
-                String endZeitString = daten[3].trim(); // Endzeit
-                String zeitzone = daten[4].trim();
-                String ort = daten[5].trim();
+                String endDatum = daten[3].trim();
+                String endZeitString = daten[4].trim(); // Endzeit
+                String zeitzone = daten[5].trim();
+                String ort = daten[6].trim();
 
-                startZeit = LocalTime.parse(startZeitString, DateTimeFormatter.ofPattern("HH:mm:ss"));
-                endZeit = LocalTime.parse(endZeitString, DateTimeFormatter.ofPattern("HH:mm:ss"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+                startZeit = LocalDateTime.parse(startDatum + " " + startZeitString, formatter);
+                endZeit = LocalDateTime.parse(endDatum + " " + endZeitString, formatter);
 
                 Duration differenz = Duration.between(startZeit, endZeit);
 
@@ -53,16 +55,19 @@ public class Ausgabe {
                 gesamtMinuten += minuten;
 
                 // Ergebnis ausgeben
-                System.out.println(datum + ", " + startZeitString + ", " + endZeitString + ", " + zeitzone + ", " + ort + " (" + String.format("%02d", stunden) + ":" + String.format("%02d", minuten) + ")");
-            }else {
+                System.out.println(startDatum + ", " + startZeitString + ", " + endDatum + ", " + endZeitString + ", " + zeitzone + ", " + ort + " (" + String.format("%02d", stunden) + ":" + String.format("%02d", minuten) + ")");
+            } else {
                 System.out.println("Datensatz unvollständig!");
             }
         }
+
         if (gesamtMinuten >= 60) {
             gesamtStunden += gesamtMinuten / 60; // Stunden hinzufügen
             gesamtMinuten = gesamtMinuten % 60; // Restliche Minuten berechnen
         }
+
         System.out.println("\nGesamt: (" + String.format("%02d", gesamtStunden) + ":" + String.format("%02d", gesamtMinuten) + ")");
         bufferedReader.close();
     }
 }
+
